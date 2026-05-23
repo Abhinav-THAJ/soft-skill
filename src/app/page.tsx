@@ -271,11 +271,11 @@ export default function Home() {
       {/* Featured Programs Section */}
       <section className="relative z-10 py-20 bg-brand-navy-dark/40 border-y border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row justify-between items-end mb-12">
+          <div className="flex flex-col sm:flex-row justify-between items-center sm:items-end text-center sm:text-left mb-12">
             <div className="space-y-2">
               <p className="text-xs uppercase text-brand-gold font-bold tracking-widest">Curated Curriculums</p>
               <h2 className="text-3xl font-bold tracking-tight text-white font-heading">Featured Programs</h2>
-              <div className="w-12 h-1 bg-brand-gold mt-2" />
+              <div className="w-12 h-1 bg-brand-gold mt-2 mx-auto sm:mx-0" />
             </div>
             <Link
               href="/programs"
