@@ -11,7 +11,7 @@ import {
   Users2,
   GraduationCap,
   ChevronDown,
-  ArrowRight
+  ArrowRight,
 } from "lucide-react";
 
 interface ServiceItem {
@@ -24,14 +24,14 @@ interface ServiceItem {
 }
 
 export default function Services() {
-  const [expandedId, setExpandedId] = useState<number | null>(1); // Default first item open
+  const [expandedId, setExpandedId] = useState<number | null>(1);
 
   const servicesData: ServiceItem[] = [
     {
       id: 1,
       title: "Leadership Development",
       desc: "Develop strong, confident, and transformational leaders.",
-      icon: <TrendingUp className="text-brand-gold" size={28} />,
+      icon: <TrendingUp size={28} color="#c9a227" />,
       listTitle: "Programs Include:",
       list: [
         "Leadership Essentials",
@@ -39,14 +39,14 @@ export default function Services() {
         "Executive Presence",
         "Decision Making",
         "Emotional Intelligence",
-        "Change Management"
-      ]
+        "Change Management",
+      ],
     },
     {
       id: 2,
       title: "Soft Skills & Behavioral Training",
       desc: "Enhance communication and workplace effectiveness.",
-      icon: <Brain className="text-brand-gold" size={28} />,
+      icon: <Brain size={28} color="#c9a227" />,
       listTitle: "Programs Include:",
       list: [
         "Communication Skills",
@@ -55,206 +55,347 @@ export default function Services() {
         "Business Etiquette",
         "Time Management",
         "Stress Management",
-        "Conflict Resolution"
-      ]
+        "Conflict Resolution",
+      ],
     },
     {
       id: 3,
       title: "Sales & Customer Service Training",
       desc: "Drive business growth through customer-centric excellence.",
-      icon: <Shield className="text-brand-gold" size={28} />,
+      icon: <Shield size={28} color="#c9a227" />,
       listTitle: "Programs Include:",
       list: [
         "Advanced Sales Techniques",
         "Negotiation Skills",
         "Customer Relationship Management",
         "Service Excellence",
-        "Retail Sales Effectiveness"
-      ]
+        "Retail Sales Effectiveness",
+      ],
     },
     {
       id: 4,
       title: "AI & Future-Tech Readiness",
       desc: "Prepare teams for the digital future.",
-      icon: <Cpu className="text-brand-gold" size={28} />,
+      icon: <Cpu size={28} color="#c9a227" />,
       listTitle: "Programs Include:",
       list: [
         "AI Awareness for Employees",
         "Prompt Engineering Basics",
         "Digital Transformation Mindset",
         "Workplace Productivity with AI",
-        "Future Skills Development"
-      ]
+        "Future Skills Development",
+      ],
     },
     {
       id: 5,
       title: "Team Building & Employee Engagement",
       desc: "Strengthen collaboration and workplace culture.",
-      icon: <Users2 className="text-brand-gold" size={28} />,
+      icon: <Users2 size={28} color="#c9a227" />,
       listTitle: "Activities Include:",
       list: [
         "Team Bonding Workshops",
         "Outdoor Learning Activities",
         "Adventure-Based Learning",
         "Employee Motivation Sessions",
-        "Fun Learning Events"
-      ]
+        "Fun Learning Events",
+      ],
     },
     {
       id: 6,
       title: "Campus to Corporate Programs",
       desc: "Help students transition successfully into professional environments.",
-      icon: <GraduationCap className="text-brand-gold" size={28} />,
+      icon: <GraduationCap size={28} color="#c9a227" />,
       listTitle: "Topics Include:",
       list: [
         "Interview Skills",
         "Resume Building",
         "Corporate Communication",
         "Workplace Readiness",
-        "Confidence Building"
-      ]
-    }
+        "Confidence Building",
+      ],
+    },
   ];
-
-  const handleCardClick = (id: number) => {
-    setExpandedId(expandedId === id ? null : id);
-  };
 
   return (
     <PageWrapper>
-      {/* Background elements */}
-      <div className="absolute top-[30%] left-[-5%] w-[400px] h-[400px] rounded-full bg-brand-blue/5 blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-[20%] right-[-5%] w-[400px] h-[400px] rounded-full bg-brand-gold/5 blur-[130px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
-        {/* Page Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.div
+      {/* Header */}
+      <div style={{ background: "#f4f7fc", padding: "48px 24px 48px" }}>
+        <div style={{ textAlign: "center" }}>
+          <motion.p
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-xs uppercase text-brand-gold font-bold tracking-widest"
+            style={{
+              fontSize: 12,
+              fontWeight: 700,
+              color: "#c9a227",
+              textTransform: "uppercase",
+              letterSpacing: "0.12em",
+              marginBottom: 10,
+            }}
           >
             L&D Solutions
-          </motion.div>
+          </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl sm:text-5xl font-bold tracking-tight text-white mt-3 font-heading"
+            style={{
+              fontSize: "clamp(28px, 4vw, 44px)",
+              fontWeight: 800,
+              color: "#1a2b5e",
+              fontFamily: "var(--font-heading)",
+              marginBottom: 12,
+            }}
           >
             Corporate Training Services
           </motion.h1>
-          <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="w-16 h-1 bg-brand-gold mx-auto mt-4"
+          <div
+            style={{
+              width: 44,
+              height: 3,
+              background: "#c9a227",
+              borderRadius: 2,
+              margin: "0 auto",
+            }}
           />
         </div>
+      </div>
 
-        {/* Services Accordion Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {servicesData.map((service, index) => {
-            const isExpanded = expandedId === service.id;
-            return (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                layout
-                className={`flex flex-col rounded-2xl border text-left cursor-pointer transition-all duration-300 ${
-                  isExpanded
-                    ? "bg-brand-navy/60 border-brand-gold glow-gold"
-                    : "bg-brand-navy/30 border-white/5 hover:border-brand-blue/50"
-                }`}
-                onClick={() => handleCardClick(service.id)}
-              >
-                {/* Card Header */}
-                <div className="p-8 flex flex-col justify-between flex-grow">
-                  <div className="space-y-4">
-                    {/* Icon */}
-                    <div className="w-14 h-14 rounded-xl bg-brand-blue/15 border border-brand-blue/30 flex items-center justify-center">
+      {/* Services Grid */}
+      <section style={{ background: "#ffffff", padding: "56px 24px" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: 24,
+            }}
+            className="services-grid"
+          >
+            {servicesData.map((service, index) => {
+              const isExpanded = expandedId === service.id;
+              return (
+                <motion.div
+                  key={service.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  layout
+                  onClick={() =>
+                    setExpandedId(expandedId === service.id ? null : service.id)
+                  }
+                  style={{
+                    borderRadius: 10,
+                    border: isExpanded
+                      ? "2px solid #c9a227"
+                      : "1px solid #e2e8f0",
+                    background: isExpanded ? "#1a2b5e" : "#ffffff",
+                    cursor: "pointer",
+                    overflow: "hidden",
+                    boxShadow: isExpanded
+                      ? "0 8px 28px rgba(26,43,94,0.18)"
+                      : "0 2px 8px rgba(26,43,94,0.06)",
+                    transition: "all 0.3s ease",
+                  }}
+                >
+                  <div style={{ padding: "28px 24px" }}>
+                    <div
+                      style={{
+                        width: 52,
+                        height: 52,
+                        borderRadius: 10,
+                        background: isExpanded
+                          ? "rgba(201,162,39,0.15)"
+                          : "rgba(201,162,39,0.09)",
+                        border: "1px solid rgba(201,162,39,0.25)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        marginBottom: 18,
+                      }}
+                    >
                       {service.icon}
                     </div>
-                    {/* Title */}
-                    <h3 className="text-xl font-bold text-white font-heading">
+                    <h3
+                      style={{
+                        fontSize: 16,
+                        fontWeight: 700,
+                        color: isExpanded ? "#ffffff" : "#1a2b5e",
+                        marginBottom: 8,
+                        fontFamily: "var(--font-heading)",
+                      }}
+                    >
                       {service.title}
                     </h3>
-                    {/* Description */}
-                    <p className="text-sm text-gray-300 leading-relaxed">
+                    <p
+                      style={{
+                        fontSize: 13.5,
+                        color: isExpanded
+                          ? "rgba(255,255,255,0.75)"
+                          : "#6b7280",
+                        lineHeight: 1.6,
+                        marginBottom: 20,
+                      }}
+                    >
                       {service.desc}
                     </p>
+
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        fontSize: 12,
+                        fontWeight: 700,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.06em",
+                        color: "#c9a227",
+                      }}
+                    >
+                      <span>{isExpanded ? "Hide Details" : "View Details"}</span>
+                      <motion.div
+                        animate={{ rotate: isExpanded ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <ChevronDown size={18} color="#c9a227" />
+                      </motion.div>
+                    </div>
                   </div>
 
-                  {/* Toggle Indicator */}
-                  <div className="mt-8 flex items-center justify-between text-xs font-semibold tracking-wider uppercase text-brand-gold">
-                    <span>{isExpanded ? "Hide Details" : "View Details"}</span>
-                    <motion.div
-                      animate={{ rotate: isExpanded ? 180 : 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <ChevronDown size={18} />
-                    </motion.div>
-                  </div>
-                </div>
-
-                {/* Accordion Content */}
-                <AnimatePresence initial={false}>
-                  {isExpanded && (
-                    <motion.div
-                      key="content"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                      className="overflow-hidden border-t border-white/5 bg-brand-navy-dark/40 rounded-b-2xl"
-                    >
-                      <div className="p-8 space-y-4" onClick={(e) => e.stopPropagation()}>
-                        <h4 className="text-xs font-bold uppercase tracking-wider text-brand-gold-warm">
-                          {service.listTitle}
-                        </h4>
-                        <ul className="space-y-2.5">
-                          {service.list.map((prog) => (
-                            <li key={prog} className="flex items-center gap-2.5 text-sm text-gray-300 font-medium">
-                              <ArrowRight size={14} className="text-brand-blue shrink-0" />
-                              <span>{prog}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* Dynamic CTA at the bottom */}
-        <div className="mt-20 glass-panel border border-white/5 rounded-2xl p-10 text-center max-w-4xl mx-auto relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-[200px] h-[200px] bg-brand-gold/5 blur-[80px] pointer-events-none" />
-          <div className="relative z-10 space-y-6">
-            <h3 className="text-2xl font-bold text-white font-heading">
-              Need a Custom Training Framework?
-            </h3>
-            <p className="text-sm text-gray-300 max-w-xl mx-auto leading-relaxed">
-              We design bespoke training solutions matching your specific workforce size, industry compliance, and operational goals. Contact our consulting team today.
-            </p>
-            <motion.div whileHover={{ scale: 1.02 }} className="inline-block">
-              <a
-                href="/contact"
-                className="inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold tracking-wide text-brand-navy bg-brand-gold rounded-lg hover:bg-brand-gold-accent transition-colors"
-              >
-                Inquire About Services
-              </a>
-            </motion.div>
+                  <AnimatePresence initial={false}>
+                    {isExpanded && (
+                      <motion.div
+                        key="content"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        style={{
+                          overflow: "hidden",
+                          borderTop: "1px solid rgba(255,255,255,0.12)",
+                          background: "rgba(0,0,0,0.12)",
+                        }}
+                      >
+                        <div
+                          style={{ padding: "20px 24px 24px" }}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <p
+                            style={{
+                              fontSize: 11,
+                              fontWeight: 700,
+                              textTransform: "uppercase",
+                              letterSpacing: "0.1em",
+                              color: "#c9a227",
+                              marginBottom: 12,
+                            }}
+                          >
+                            {service.listTitle}
+                          </p>
+                          <ul
+                            style={{
+                              listStyle: "none",
+                              padding: 0,
+                              margin: 0,
+                              display: "flex",
+                              flexDirection: "column",
+                              gap: 8,
+                            }}
+                          >
+                            {service.list.map((item) => (
+                              <li
+                                key={item}
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: 8,
+                                  fontSize: 13.5,
+                                  color: "rgba(255,255,255,0.85)",
+                                  fontWeight: 500,
+                                }}
+                              >
+                                <ArrowRight size={13} color="#c9a227" />
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
+        <style>{`
+          @media (max-width: 900px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          }
+          @media (max-width: 540px) {
+            .services-grid { grid-template-columns: 1fr !important; }
+          }
+        `}</style>
+      </section>
 
-      </div>
+      {/* CTA */}
+      <section
+        style={{
+          background: "linear-gradient(135deg, #1a2b5e 0%, #1e3a6e 100%)",
+          padding: "56px 24px",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 800,
+            margin: "0 auto",
+            textAlign: "center",
+          }}
+        >
+          <h3
+            style={{
+              fontSize: "clamp(20px, 3vw, 28px)",
+              fontWeight: 800,
+              color: "#ffffff",
+              marginBottom: 14,
+              fontFamily: "var(--font-heading)",
+            }}
+          >
+            Need a Custom Training Framework?
+          </h3>
+          <p
+            style={{
+              fontSize: 14.5,
+              color: "rgba(255,255,255,0.75)",
+              lineHeight: 1.7,
+              marginBottom: 28,
+              maxWidth: 540,
+              margin: "0 auto 28px",
+            }}
+          >
+            We design bespoke training solutions matching your specific workforce
+            size, industry compliance, and operational goals.
+          </p>
+          <a
+            href="/contact"
+            style={{
+              display: "inline-block",
+              padding: "12px 32px",
+              background: "#c9a227",
+              color: "#ffffff",
+              fontWeight: 700,
+              fontSize: 15,
+              borderRadius: 4,
+              textDecoration: "none",
+              transition: "background 0.3s ease",
+            }}
+          >
+            Inquire About Services
+          </a>
+        </div>
+      </section>
     </PageWrapper>
   );
 }

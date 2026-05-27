@@ -49,7 +49,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${manrope.variable} ${inter.variable} h-full scroll-smooth`}>
-      <body className="min-h-full flex flex-col bg-brand-navy-dark text-gray-200">
+      <body className="min-h-full flex flex-col" style={{ background: "#ffffff", color: "#1a2b5e" }}>
         <Navbar />
         {children}
         <Footer />

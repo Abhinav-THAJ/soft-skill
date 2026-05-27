@@ -14,7 +14,8 @@ export default function PageWrapper({ children }: PageWrapperProps) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -15 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className="flex-grow pt-24 pb-16"
+      className="flex-grow"
+      style={{ paddingTop: 72, background: "#ffffff" }}
     >
       {children}
     </motion.main>
