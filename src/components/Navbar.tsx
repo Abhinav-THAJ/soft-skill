@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,9 +12,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -23,6 +21,11 @@ export default function Navbar() {
     document.body.style.overflow = isOpen ? "hidden" : "unset";
     return () => { document.body.style.overflow = "unset"; };
   }, [isOpen]);
+
+  // Close menu on route change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -35,6 +38,19 @@ export default function Navbar() {
 
   return (
     <>
+      <style>{`
+        /* Desktop: show nav links & CTA, hide hamburger */
+        .nav-desktop-links { display: flex; }
+        .nav-cta-desktop   { display: block; }
+        .nav-hamburger     { display: none; }
+
+        @media (max-width: 1023px) {
+          .nav-desktop-links { display: none; }
+          .nav-cta-desktop   { display: none; }
+          .nav-hamburger     { display: flex; }
+        }
+      `}</style>
+
       <header
         style={{
           position: "fixed",
@@ -53,7 +69,7 @@ export default function Navbar() {
           style={{
             maxWidth: 1200,
             margin: "0 auto",
-            padding: "0 24px",
+            padding: "0 20px",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -61,7 +77,7 @@ export default function Navbar() {
           }}
         >
           {/* Logo */}
-          <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
+          <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0 }}>
             <Image
               src="/logo.png"
               alt="N-DOBLE Logo"
@@ -74,8 +90,8 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <nav
-            className="hidden lg:flex"
-            style={{ display: "flex", alignItems: "center", gap: 4 }}
+            className="nav-desktop-links"
+            style={{ alignItems: "center", gap: 2 }}
           >
             {navLinks.map((link) => {
               const isActive = pathname === link.path;
@@ -92,12 +108,13 @@ export default function Navbar() {
                     borderRadius: 4,
                     transition: "color 0.2s ease",
                     position: "relative",
+                    whiteSpace: "nowrap",
                   }}
                   onMouseEnter={(e) => {
-                    if (!isActive) (e.target as HTMLElement).style.color = "#c9a227";
+                    if (!isActive) (e.currentTarget as HTMLElement).style.color = "#c9a227";
                   }}
                   onMouseLeave={(e) => {
-                    if (!isActive) (e.target as HTMLElement).style.color = "#1a2b5e";
+                    if (!isActive) (e.currentTarget as HTMLElement).style.color = "#1a2b5e";
                   }}
                 >
                   {link.name}
@@ -119,8 +136,8 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden lg:block">
+          {/* CTA Button — Desktop */}
+          <div className="nav-cta-desktop">
             <Link
               href="/contact"
               style={{
@@ -133,21 +150,24 @@ export default function Navbar() {
                 borderRadius: 4,
                 textDecoration: "none",
                 transition: "all 0.3s ease",
+                whiteSpace: "nowrap",
+                minHeight: 44,
+                lineHeight: "24px",
               }}
               onMouseEnter={(e) => {
-                (e.target as HTMLElement).style.background = "#e8b830";
+                (e.currentTarget as HTMLElement).style.background = "#e8b830";
               }}
               onMouseLeave={(e) => {
-                (e.target as HTMLElement).style.background = "#c9a227";
+                (e.currentTarget as HTMLElement).style.background = "#c9a227";
               }}
             >
               Let&apos;s Connect
             </Link>
           </div>
 
-          {/* Mobile menu toggle */}
+          {/* Hamburger — Mobile */}
           <button
-            className="lg:hidden"
+            className="nav-hamburger"
             onClick={() => setIsOpen(!isOpen)}
             style={{
               background: "none",
@@ -155,15 +175,20 @@ export default function Navbar() {
               cursor: "pointer",
               color: "#1a2b5e",
               padding: 8,
+              alignItems: "center",
+              justifyContent: "center",
+              minWidth: 44,
+              minHeight: 44,
+              borderRadius: 4,
             }}
-            aria-label="Toggle menu"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </header>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer — full screen overlay */}
       {isOpen && (
         <div
           style={{
@@ -172,12 +197,19 @@ export default function Navbar() {
             zIndex: 40,
             backgroundColor: "#ffffff",
             paddingTop: 80,
-            paddingLeft: 24,
-            paddingRight: 24,
+            display: "flex",
+            flexDirection: "column",
             overflowY: "auto",
           }}
         >
-          <nav style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+          <nav
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              padding: "8px 24px",
+              flex: 1,
+            }}
+          >
             {navLinks.map((link) => {
               const isActive = pathname === link.path;
               return (
@@ -186,33 +218,50 @@ export default function Navbar() {
                   href={link.path}
                   onClick={() => setIsOpen(false)}
                   style={{
-                    padding: "14px 16px",
-                    fontSize: 16,
+                    padding: "16px 4px",
+                    fontSize: 17,
                     fontWeight: isActive ? 700 : 500,
                     color: isActive ? "#c9a227" : "#1a2b5e",
                     textDecoration: "none",
                     borderBottom: "1px solid #e8edf5",
-                    display: "block",
+                    display: "flex",
+                    alignItems: "center",
+                    minHeight: 56,
                   }}
                 >
                   {link.name}
+                  {isActive && (
+                    <span
+                      style={{
+                        marginLeft: "auto",
+                        width: 6,
+                        height: 6,
+                        borderRadius: "50%",
+                        background: "#c9a227",
+                        flexShrink: 0,
+                      }}
+                    />
+                  )}
                 </Link>
               );
             })}
+
             <Link
               href="/contact"
               onClick={() => setIsOpen(false)}
               style={{
-                marginTop: 20,
-                display: "block",
-                padding: "14px 16px",
+                marginTop: 24,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "16px",
                 background: "#c9a227",
                 color: "#ffffff",
                 fontWeight: 700,
-                fontSize: 15,
+                fontSize: 16,
                 borderRadius: 6,
                 textDecoration: "none",
-                textAlign: "center",
+                minHeight: 52,
               }}
             >
               Let&apos;s Connect

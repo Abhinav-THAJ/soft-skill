@@ -258,14 +258,6 @@ export default function Programs() {
             ))}
           </div>
         </div>
-        <style>{`
-          @media (max-width: 900px) {
-            .programs-grid { grid-template-columns: repeat(2, 1fr) !important; }
-          }
-          @media (max-width: 540px) {
-            .programs-grid { grid-template-columns: 1fr !important; }
-          }
-        `}</style>
       </section>
 
       {/* Training Formats */}
@@ -370,14 +362,6 @@ export default function Programs() {
             ))}
           </div>
         </div>
-        <style>{`
-          @media (max-width: 900px) {
-            .formats-grid { grid-template-columns: repeat(2, 1fr) !important; }
-          }
-          @media (max-width: 540px) {
-            .formats-grid { grid-template-columns: 1fr !important; }
-          }
-        `}</style>
       </section>
     </PageWrapper>
   );

@@ -13,10 +13,6 @@ import {
   Layers,
   Monitor,
   Zap,
-  Phone,
-  Mail,
-  Globe,
-  ChevronRight,
 } from "lucide-react";
 
 /* ─── DATA ─────────────────────────────────────────────── */
@@ -75,24 +71,23 @@ export default function Home() {
       <section
         style={{
           background: "#f4f7fc",
-          paddingTop: 100,
+          paddingTop: 0,
           paddingBottom: 0,
           position: "relative",
           overflow: "hidden",
-          minHeight: 520,
+          minHeight: 480,
         }}
       >
         <div
+          className="hero-grid"
           style={{
             maxWidth: 1200,
             margin: "0 auto",
-            padding: "40px 24px 0",
+            padding: "48px 24px 0",
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
             gap: 48,
             alignItems: "center",
           }}
-          className="hero-grid"
         >
           {/* Left: Text */}
           <motion.div
@@ -114,7 +109,7 @@ export default function Home() {
 
             <h1
               style={{
-                fontSize: "clamp(28px, 4vw, 46px)",
+                fontSize: "clamp(26px, 4vw, 46px)",
                 fontWeight: 800,
                 color: "#1a2b5e",
                 lineHeight: 1.2,
@@ -155,12 +150,14 @@ export default function Home() {
                   borderRadius: 4,
                   textDecoration: "none",
                   transition: "background 0.3s ease",
+                  minHeight: 44,
+                  lineHeight: "20px",
                 }}
                 onMouseEnter={(e) =>
-                  ((e.target as HTMLElement).style.background = "#1e3a6e")
+                  ((e.currentTarget as HTMLElement).style.background = "#1e3a6e")
                 }
                 onMouseLeave={(e) =>
-                  ((e.target as HTMLElement).style.background = "#1a2b5e")
+                  ((e.currentTarget as HTMLElement).style.background = "#1a2b5e")
                 }
               >
                 Explore Our Services
@@ -178,14 +175,16 @@ export default function Home() {
                   textDecoration: "none",
                   border: "1.5px solid #1a2b5e",
                   transition: "all 0.3s ease",
+                  minHeight: 44,
+                  lineHeight: "20px",
                 }}
                 onMouseEnter={(e) => {
-                  (e.target as HTMLElement).style.background = "#1a2b5e";
-                  (e.target as HTMLElement).style.color = "#ffffff";
+                  (e.currentTarget as HTMLElement).style.background = "#1a2b5e";
+                  (e.currentTarget as HTMLElement).style.color = "#ffffff";
                 }}
                 onMouseLeave={(e) => {
-                  (e.target as HTMLElement).style.background = "transparent";
-                  (e.target as HTMLElement).style.color = "#1a2b5e";
+                  (e.currentTarget as HTMLElement).style.background = "transparent";
+                  (e.currentTarget as HTMLElement).style.color = "#1a2b5e";
                 }}
               >
                 About Us
@@ -193,8 +192,9 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Right: Image */}
+          {/* Right: Image — hidden on mobile via CSS class */}
           <motion.div
+            className="hero-image-col"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
@@ -218,29 +218,19 @@ export default function Home() {
             </div>
           </motion.div>
         </div>
-
-        {/* Mobile responsive override */}
-        <style>{`
-          @media (max-width: 768px) {
-            .hero-grid {
-              grid-template-columns: 1fr !important;
-            }
-          }
-        `}</style>
       </section>
 
       {/* ── FEATURE STRIP ───────────────────────────────────── */}
       <section style={{ background: "#1a2b5e", padding: "0" }}>
         <div
+          className="feature-grid"
           style={{
             maxWidth: 1200,
             margin: "0 auto",
             padding: "0 24px",
             display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
             gap: 0,
           }}
-          className="feature-grid"
         >
           {featureStrip.map((item, i) => (
             <motion.div
@@ -290,25 +280,19 @@ export default function Home() {
             </motion.div>
           ))}
         </div>
-        <style>{`
-          @media (max-width: 768px) {
-            .feature-grid { grid-template-columns: 1fr !important; }
-          }
-        `}</style>
       </section>
 
       {/* ── ABOUT US ─────────────────────────────────────────── */}
       <section style={{ padding: "72px 24px", background: "#ffffff" }}>
         <div
+          className="about-grid"
           style={{
             maxWidth: 1200,
             margin: "0 auto",
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
             gap: 60,
             alignItems: "center",
           }}
-          className="about-grid"
         >
           {/* Image */}
           <motion.div
@@ -422,23 +406,20 @@ export default function Home() {
                 textDecoration: "none",
                 marginTop: 8,
                 transition: "background 0.3s ease",
+                minHeight: 44,
+                lineHeight: "22px",
               }}
               onMouseEnter={(e) =>
-                ((e.target as HTMLElement).style.background = "#e8b830")
+                ((e.currentTarget as HTMLElement).style.background = "#e8b830")
               }
               onMouseLeave={(e) =>
-                ((e.target as HTMLElement).style.background = "#c9a227")
+                ((e.currentTarget as HTMLElement).style.background = "#c9a227")
               }
             >
               Learn More
             </Link>
           </motion.div>
         </div>
-        <style>{`
-          @media (max-width: 768px) {
-            .about-grid { grid-template-columns: 1fr !important; }
-          }
-        `}</style>
       </section>
 
       {/* ── SOLUTIONS ────────────────────────────────────────── */}
@@ -482,12 +463,11 @@ export default function Home() {
 
           {/* Cards */}
           <div
+            className="solutions-grid"
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
               gap: 24,
             }}
-            className="solutions-grid"
           >
             {solutions.map((s, i) => (
               <motion.div
@@ -503,7 +483,6 @@ export default function Home() {
                   border: "1px solid #e2e8f0",
                   boxShadow: "0 2px 8px rgba(26,43,94,0.06)",
                   transition: "all 0.3s ease",
-                  cursor: "default",
                 }}
                 whileHover={{
                   y: -6,
@@ -556,14 +535,6 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <style>{`
-          @media (max-width: 900px) {
-            .solutions-grid { grid-template-columns: repeat(2, 1fr) !important; }
-          }
-          @media (max-width: 500px) {
-            .solutions-grid { grid-template-columns: 1fr !important; }
-          }
-        `}</style>
       </section>
 
       {/* ── CTA BANNER ───────────────────────────────────────── */}
@@ -626,12 +597,14 @@ export default function Home() {
                 textDecoration: "none",
                 transition: "background 0.3s ease",
                 whiteSpace: "nowrap",
+                minHeight: 44,
+                lineHeight: "20px",
               }}
               onMouseEnter={(e) =>
-                ((e.target as HTMLElement).style.background = "#e8b830")
+                ((e.currentTarget as HTMLElement).style.background = "#e8b830")
               }
               onMouseLeave={(e) =>
-                ((e.target as HTMLElement).style.background = "#c9a227")
+                ((e.currentTarget as HTMLElement).style.background = "#c9a227")
               }
             >
               Let&apos;s Connect

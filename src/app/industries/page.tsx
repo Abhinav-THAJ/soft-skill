@@ -220,14 +220,6 @@ export default function Industries() {
             ))}
           </div>
         </div>
-        <style>{`
-          @media (max-width: 900px) {
-            .industries-grid { grid-template-columns: repeat(2, 1fr) !important; }
-          }
-          @media (max-width: 540px) {
-            .industries-grid { grid-template-columns: 1fr !important; }
-          }
-        `}</style>
       </section>
 
       {/* Testimonials */}
@@ -355,14 +347,6 @@ export default function Industries() {
             ))}
           </div>
         </div>
-        <style>{`
-          @media (max-width: 900px) {
-            .testimonials-grid { grid-template-columns: repeat(2, 1fr) !important; }
-          }
-          @media (max-width: 540px) {
-            .testimonials-grid { grid-template-columns: 1fr !important; }
-          }
-        `}</style>
       </section>
     </PageWrapper>
   );

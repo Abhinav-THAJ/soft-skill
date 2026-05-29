@@ -202,12 +202,6 @@ export default function About() {
             />
           </motion.div>
         </div>
-        <style>{`
-          @media (max-width: 768px) {
-            .about-who-grid { grid-template-columns: 1fr !important; }
-            .spec-grid { grid-template-columns: 1fr !important; }
-          }
-        `}</style>
       </section>
 
       {/* Section 2: Vision & Mission */}
@@ -336,11 +330,6 @@ export default function About() {
             </p>
           </motion.div>
         </div>
-        <style>{`
-          @media (max-width: 768px) {
-            .vm-grid { grid-template-columns: 1fr !important; }
-          }
-        `}</style>
       </section>
 
       {/* Section 3: Why Choose Us */}
@@ -430,14 +419,6 @@ export default function About() {
             ))}
           </div>
         </div>
-        <style>{`
-          @media (max-width: 900px) {
-            .why-grid { grid-template-columns: repeat(2, 1fr) !important; }
-          }
-          @media (max-width: 540px) {
-            .why-grid { grid-template-columns: 1fr !important; }
-          }
-        `}</style>
       </section>
     </PageWrapper>
   );
